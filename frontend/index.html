@@ -4,8 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chitchat</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            background-color: rgb(92, 24, 92);
+        }
+
+        #conatainer{
+            height: 530px;
+            width: 30%;
+            margin-left: 200px;
+            margin-top: 90px;
+        }
+
+        .small{
+            width: 200px;
+            height: 55px;
+            display: flex;
+            gap: 15px;
+            font-size: 22px;
+            color: white;
+        }
+
+        .small>div{
+            width: 100%;
+        }
+       
+        .small>div:first-child{
+            width: 100px;
+        }
+
+        .small>div:first-child>img{
+            width: 100%;
+            height: 55px;
+            border-radius: 50%;
+            background-color: none;
+        }
+
+        h2{
+            margin-top: 40px;
+            font-size: 40px;
+            color: white;
+        }
+
+        button{
+            margin-top: 23px;
+            padding: 10px;
+            width: 60%;
+            border-radius: 5px;
+            font-size: 17px;
+            background-color: rgb(8, 97, 8);
+            color: white;
+            font-weight: bold;
+            border: none;
+        }
+
+        p{
+            margin-top: 20px;
+            color: white;
+        }
+
+        .p2{
+            margin-top: 100px;
+        }
+        
+        span{
+            text-decoration: underline;
+        }
+
+    </style>
 </head>
 <body>
+    <div id="main">
+        
+    </div>
+
+
+    <div id="conatainer">
+       <div class="small">
+        <div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPA-pKA_0NUfAHbWB6y0JpW5wwWNz-LJTdShxwzXxyQA&s" alt="">
+        </div>
+        <div>
+            <h1>slack</h1>
+        </div>
+       </div>
+
+       <h2>Slack brings the <br> team together <br> whatever you are</h2>
+
+       <a href="#"><button>Sign In to Slack</button></a>
+
+       <p>We'll take you to your web browser to sign in and <br> then bring you back here.</p>
+
+       <p class="p2">Is your team new to slack? <span>Create a new workspace</span></p>
+    </div>
+
+
     
 </body>
 </html>
