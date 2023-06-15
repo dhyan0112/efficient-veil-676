@@ -2,7 +2,7 @@ const express=require('express');
 const app=express();
 app.use(express.json());
 const http=require('http');
-const  connection  = require('./db');
+const  connection  = require('./config/db');
 
 const {userRouter}=require("./routes/Users.routes")
 const {authenticate}=require("./middlewares/authenticate.middleware")
