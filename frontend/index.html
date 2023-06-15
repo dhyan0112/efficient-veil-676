@@ -14,6 +14,15 @@
             background-color: rgb(92, 24, 92);
         }
 
+        #main{
+          width: 100%;
+          height: 630px;
+          display: flex;
+        }
+        #main>div{
+            width: 100%;
+        }
+
         #conatainer{
             height: 530px;
             width: 30%;
@@ -61,6 +70,7 @@
             color: white;
             font-weight: bold;
             border: none;
+            cursor: pointer;
         }
 
         p{
@@ -74,17 +84,57 @@
         
         span{
             text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .sec>div{
+            width: 80%;
+            margin-top: 90px;
+            display: block;
+            height: 450px;
+            /* margin: auto; */
+            border-radius: 50%;
+        }
+
+        .sec>div>img{
+            width: 100%;
+            border-radius: 50%;
+            height: 450px;
         }
 
     </style>
 </head>
 <body>
+    
     <div id="main">
-        
+        <div id="conatainer">
+            <div class="small">
+             <div>
+                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPA-pKA_0NUfAHbWB6y0JpW5wwWNz-LJTdShxwzXxyQA&s" alt="">
+             </div>
+             <div>
+                 <h1>slack</h1>
+             </div>
+            </div>
+     
+            <h2>Slack brings the <br> team together <br> whatever you are</h2>
+     
+            <a href="./signup.html"><button>Sign In to Slack</button></a>
+     
+            <p>We'll take you to your web browser to sign in and <br> then bring you back here.</p>
+     
+            <p class="p2">Is your team new to slack? <span>Create a new workspace</span></p>
+         </div>
+
+        <div class="sec">
+            <div>
+                <img src="https://crehana-blog.imgix.net/media/filer_public/48/a8/48a89a10-b7f5-4c34-97ba-5cc111fb66aa/que-es-slack.jpg" alt="">
+            </div>
+        </div>
     </div>
 
 
-    <div id="conatainer">
+   <!-- <div id="conatainer">
        <div class="small">
         <div>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPA-pKA_0NUfAHbWB6y0JpW5wwWNz-LJTdShxwzXxyQA&s" alt="">
@@ -96,14 +146,11 @@
 
        <h2>Slack brings the <br> team together <br> whatever you are</h2>
 
-       <a href="#"><button>Sign In to Slack</button></a>
+       <a href="./signup.html"><button>Sign In to Slack</button></a>
 
        <p>We'll take you to your web browser to sign in and <br> then bring you back here.</p>
 
        <p class="p2">Is your team new to slack? <span>Create a new workspace</span></p>
-    </div>
-
-
-    
+    </div> -->
 </body>
 </html>
