@@ -17,7 +17,10 @@ const userSchema = new mongoose.Schema({
   },
   workspace: {
     type: mongoose.Schema.Types.ObjectId,
+
     ref: "Workspace"
+
+    ref: "Workspace",
   },
 });
 

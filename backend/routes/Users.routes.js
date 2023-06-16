@@ -1,10 +1,12 @@
-const express=require("express")
-const {JsonWebToken} = require("jsonwebtoken")
-const {UserModel}=require("../models/User.model")
-const userRouter=express.Router()
-const jwt=require("jsonwebtoken")
-const bcrypt=require("bcrypt")
-const {blacklist}=require("../models/blacklist")
+const express = require("express");
+const UserModel = require("../models/User.model");
+const userRouter = express.Router();
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const { blacklist } = require("../models/blacklist");
+
+userRouter.post("/register", async (req, res) => {
+  const { username, email, password } = req.body;
 
 
 userRouter.post("/register",async(req,res)=>{
@@ -25,9 +27,35 @@ userRouter.post("/register",async(req,res)=>{
        
     }catch(err){
         res.send({"msg":"Something went wrong","error":err.message})
+
+  try {
+    const userpresent = await UserModel.findOne({ email });
+
+    if (userpresent) {
+      return res.status(400).json({ msg: "User Already Present Please Login" });
     }
-    
-})
+
+    bcrypt.hash(password, 5, async (err, hash) => {
+      const newuser = new UserModel({ username, email, password: hash });
+      await newuser.save();
+      res.status(200).send({ msg: "Registration successful" });
+    });
+  } catch (err) {
+    res.send({ msg: "Something went wrongs", error: err.message });
+  }
+});
+
+userRouter.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  console.log(req.body);
+  try {
+    const existingUser = await UserModel.findOne({ email });
+    if (!existingUser) {
+      return res.status(404).json({ msg: "User Not exists. Please Register." });
+
+    }
+
 
 userRouter.post("/login", async(req,res)=>{
     const {email,password}=(req.body)
@@ -55,13 +83,30 @@ userRouter.post("/login", async(req,res)=>{
      }
 })
 
-userRouter.get("/logout",(req,res)=>{
-    blacklist.push(req.headers?.authorization?.split(" ")[1])
+    const isPasswordMatch = await bcrypt.compare(
+      password,
+      existingUser.password
+    );
 
-    res.send({msg:"logout successful"})
-    })
+    if (!isPasswordMatch) {
+      return res
+        .status(400)
+        .json({ msg: "Incorrect password. Please try again." });
+    }
 
 
-module.exports={
-    userRouter
-}
+    res.status(200).json({ msg: "Login successful" });
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+userRouter.get("/logout", (req, res) => {
+  blacklist.push(req.headers?.authorization?.split(" ")[1]);
+
+  res.send({ msg: "logout successful" });
+});
+
+module.exports = {
+  userRouter,
+};
