@@ -8,16 +8,16 @@ const {blacklist}=require("../models/blacklist")
 
 
 userRouter.post("/register",async(req,res)=>{
-    const {email,pass}=req.body
+    const {username,email,password}=req.body
     try{
         const userpresent=await UserModel.findOne({email})
         if(userpresent){
             res.send("User Already Present Please Login")
         }
-        bcrypt.hash(pass,5,async(err, hash)=> {
+        bcrypt.hash(password,5,async(err, hash)=> {
             if(err) res.send({"msg":"Something went wrong","error":err.message})
             else{
-                const user=new UserModel({email,pass:hash})
+                const user=new UserModel({username,email,password:hash})
                 await user.save()
                 res.send({"msg":"New Users has been registred"})
            }
@@ -30,12 +30,14 @@ userRouter.post("/register",async(req,res)=>{
 })
 
 userRouter.post("/login", async(req,res)=>{
-    const {email,pass}=(req.body)
+    const {email,password}=(req.body)
     try{
         const user=await UserModel.find({email})
         console.log(user);
-        if(user.length>0){
-        bcrypt.compare(pass, user[0].pass,(err, result)=>{
+        if(!user){
+            res.send("wrong credential..")
+        }
+        bcrypt.compare(password, user[0].password,(err, result)=>{
             if(result){
                 let token=jwt.sign({userID:user[0]._id},"masai")
                 res.send({"msg":"Logged in","token":token})
@@ -43,10 +45,11 @@ userRouter.post("/login", async(req,res)=>{
                 res.send({"msg":"wrong inform"})
             }
         });
+   
 
-    }else{
-            res.send({"msg":"wrong credentials"})
-        }
+    // }else{
+    //         res.send({"msg":"wrong credentials"})
+    //     }
      }catch(err){
          res.send({"msg":"Something went wrong","error":err.message})
      }

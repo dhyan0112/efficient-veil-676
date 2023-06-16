@@ -17,11 +17,10 @@ const userSchema = new mongoose.Schema({
   },
   workspace: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Workspace",
-    required: true,
+    ref: "Workspace"
   },
 });
 
 const UserModel = mongoose.model("User", userSchema);
 
-module.exports = UserModel;
+module.exports = {UserModel};
