@@ -169,9 +169,45 @@
         } else {
           alert(res.msg);
         }
+
+        fetch("http://localhost:8080/users/login",{
+        // fetch("http://localhost:8080/users/login",{
+            method:"POST",
+            headers:{
+                "Content-type":"application/json"
+            },
+            body: JSON.stringify(payload)
+        }).then(res=>res.json())
+        .then(res=>{
+            if(res.msg=="Logged in"){
+                // alert("Login Successfull")
+                if(document.getElementById("email").value!="" && document.getElementById("pass").value!=""){
+            alert("Login Successfull") 
+            window.location.href="card.html"
+        }
+        else{
+            alert("Enter email and passaword")
+        }
+
+     }
+            else{
+                alert("Login Failed")
+            }
+            // console.log(res)
+            
+            localStorage.setItem("token",res.token)
+        })
+        .then(err=>console.log(err))
+        // .then(err=>alert("Login Failed"))
+        
+
+    }
+</script>
+
       })
       .catch((err) => {
         console.log(err);
       });
   };
 </script>
+
