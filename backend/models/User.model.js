@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-//usermodel
+
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -17,13 +17,10 @@ const userSchema = new mongoose.Schema({
   },
   workspace: {
     type: mongoose.Schema.Types.ObjectId,
-
-    ref: "Workspace"
-
     ref: "Workspace",
   },
 });
 
 const UserModel = mongoose.model("User", userSchema);
 
-module.exports = {UserModel};
+module.exports = UserModel;
